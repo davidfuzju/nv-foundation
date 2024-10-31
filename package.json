@@ -1,0 +1,35 @@
+{
+  "name": "nv-foundation",
+  "version": "1.0.0",
+  "homepage": "https://github.com/davidfuzju/nv-foundation",
+  "description": "\"this plugin for NuVous foundation. many shortcodes are available and its all free\"",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidfuzju/nv-foundation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidfuzju/nv-foundation/issues"
+  },
+  "scripts": {
+    "watch": "webpack -w",
+    "build": "webpack",
+    "bundle": "dir-archiver --src . --dest ../nv-foundation.zip --exclude .git .gitattributes .gitignore package.json package-lock.json node_modules *.sh webpack.config.js *.cache vendor tests .idea .github"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "babel-loader": "^8.2.2",
+    "compression-webpack-plugin": "^10.0.0",
+    "dir-archiver": "^2.0.0",
+    "webpack": "^5.38.0",
+    "webpack-cli": "^4.7.0"
+  },
+  "keywords": [
+    "WordPress",
+    "Plugin",
+    "NuVous"
+  ],
+  "author": "David FU",
+  "license": "GPL-2.0-or-later",
+  "dependencies": {}
+}
