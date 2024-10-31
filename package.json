@@ -19,7 +19,7 @@
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
     "babel-loader": "^8.2.2",
-    "compression-webpack-plugin": "^10.0.0",
+    "compression-webpack-plugin": "^11.1.0",
     "dir-archiver": "^2.0.0",
     "webpack": "^5.38.0",
     "webpack-cli": "^4.7.0"
