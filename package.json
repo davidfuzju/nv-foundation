@@ -18,7 +18,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^9.2.1",
     "compression-webpack-plugin": "^10.0.0",
     "dir-archiver": "^2.0.0",
     "webpack": "^5.38.0",
