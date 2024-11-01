@@ -3,14 +3,11 @@
 /**
  * NuVous foundation
  *
- * @link              https://github.com/davidfuzju/nv-foundation
- * @since             1.1.1
- *
  * @wordpress-plugin
  * Plugin Name:       NV Foundation
  * Plugin URI:        https://github.com/davidfuzju/nv-foundation
  * Description:       
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            David FU <david.fu.zju@gmail.com>
  * Author URI:        https://github.com/davidfuzju
  * License:           GPL-2.0+
@@ -26,7 +23,7 @@ if (! defined('WPINC')) {
 // holds the plugin path.
 define('NV_FOUNDATION_PATH', plugin_dir_path(__FILE__));
 define('NV_FOUNDATION_URI', plugin_dir_url(__FILE__));
-define('NV_FOUNDATION_VERSION', '1.0.0');
+define('NV_FOUNDATION_VERSION', '1.0.1');
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -36,8 +33,6 @@ require plugin_dir_path(__FILE__) . 'includes/class-nv-foundation.php';
 
 /**
  * Begins execution of the plugin.
- *
- * @since    1.0.0
  */
 function run_nv_foundation()
 {

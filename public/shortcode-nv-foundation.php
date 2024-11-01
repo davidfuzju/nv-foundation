@@ -13,11 +13,12 @@ function nv_foundation_user_param_shortcodes_init()
 	function nv_foundation_user_param($atts = array())
 	{
 		$para     = $atts['var'];
+		$user_id  = get_current_user_id();
 
 		switch ($para) {
-			case 'member_id': // [nv-foundation var="member_id"]
+			case 'userid': // [nv-foundation var="userid"]
 				ob_start();
-				require NV_FOUNDATION_PATH . 'public/partials/member-id.php';
+				require NV_FOUNDATION_PATH . 'public/partials/userid.php';
 
 				return ob_get_clean();
 			case 'userid-query': // [nv-foundation var="userid-query"]
