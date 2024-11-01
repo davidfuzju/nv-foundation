@@ -22,10 +22,9 @@ function nv_foundation_user_param_shortcodes_init()
 
 				return ob_get_clean();
 			case 'userid-query': // [nv-foundation var="userid-query"]
-
 				wp_enqueue_script('userid-query', plugin_dir_url(__FILE__) . 'js/nv-foundation-userid-query.js', array(), NV_FOUNDATION_VERSION, true);
 				wp_enqueue_style('userid-query-styles', plugin_dir_url(__FILE__) . 'css/nv-foundation-userid-query.css', array(), NV_FOUNDATION_VERSION);
-				wp_localize_script('jquery', 'ajaxurl', admin_url('admin-ajax.php'));
+				wp_localize_script('userid-query', 'ajaxurl', admin_url('admin-ajax.php'));
 
 				ob_start();
 				require NV_FOUNDATION_PATH . 'public/partials/userid-query.php';
