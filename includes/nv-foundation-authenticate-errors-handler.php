@@ -10,6 +10,8 @@ add_filter('authenticate', 'nv_authenticate_errors_handler', 99, 3);
  */
 function nv_authenticate_errors_handler($user, $username, $password)
 {
+    error_log('fdklajflksafkldsfjdslfadk');
+    error_log(print_r($user, true));
     // 若当前返回是 WP_Error 对象，说明认证失败
     if (is_wp_error($user)) {
         // 取出错误码
