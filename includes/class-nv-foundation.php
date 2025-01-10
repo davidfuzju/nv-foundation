@@ -83,6 +83,7 @@ class NV_Foundation
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-nv-foundation-admin.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-nv-foundation-public.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/nv-foundation-userid-query.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/nv-foundation-authenticate-errors-handler.php';
 	}
 
 	/**
