@@ -1,37 +1,81 @@
 <?php
-add_filter('authenticate', 'nv_authenticate_errors_handler', 99, 3);
-/**
- * 在 authenticate 阶段，自定义登录错误提示
- *
- * @param WP_User|WP_Error|null $user     当前认证结果（可能是 WP_Error 对象）
- * @param string                $username 用户名
- * @param string                $password 密码
- * @return WP_User|WP_Error|null
- */
-function nv_authenticate_errors_handler($user, $username, $password)
-{
-    error_log('fdklajflksafkldsfjdslfadk');
-    error_log(print_r($user, true));
-    // 若当前返回是 WP_Error 对象，说明认证失败
-    if (is_wp_error($user)) {
-        // 取出错误码
-        $error_code = $user->get_error_code();
 
-        // 如果错误码是 'invalid_username'
-        if ('invalid_username' === $error_code) {
-            // 删掉原先的错误信息
-            $user->remove('invalid_username');
-            $user->add(
+/**
+ * Authenticates a user, confirming the username and password are valid.
+ *
+ * @since 2.8.0
+ *
+ * @param WP_User|WP_Error|null $user WP_User or WP_Error object from a previous callback. Default null.
+ * @param string $username Username for authentication.
+ * @param string $password Password for authentication.
+ * @return WP_User|WP_Error WP_User on success, WP_Error on failure.
+ */
+if (! function_exists('wp_authenticate_username_password')) :
+    function wp_authenticate_username_password($user, $username, $password)
+    {
+        if ($user instanceof WP_User) {
+            return $user;
+        }
+
+        if (empty($username) || empty($password)) {
+            if (is_wp_error($user)) {
+                return $user;
+            }
+
+            $error = new WP_Error();
+
+            if (empty($username)) {
+                $error->add('empty_username', __('<strong>Error:</strong> The username field is empty.'));
+            }
+
+            if (empty($password)) {
+                $error->add('empty_password', __('<strong>Error:</strong> The password field is empty.'));
+            }
+
+            return $error;
+        }
+
+        $user = get_user_by('login', $username);
+
+        if (! $user) {
+            return new WP_Error(
                 'invalid_username',
                 sprintf(
-                    __(
-                        '<strong>Error:</strong> The username <strong>%s</strong> is not registered on this site. If you are unsure of your username, try login with sms instead.'
-                    ),
+                    /* translators: %s: User name. */
+                    __('<strong>Error:</strong> The username <strong>%s</strong> is not registered on this site. If you are unsure of your username, try login with SMS instead.'),
                     $username
                 )
             );
         }
-    }
 
-    return $user;
-}
+        /**
+         * Filters whether the given user can be authenticated with the provided password.
+         *
+         * @since 2.5.0
+         *
+         * @param WP_User|WP_Error $user WP_User or WP_Error object if a previous
+         * callback failed authentication.
+         * @param string $password Password to check against the user.
+         */
+        $user = apply_filters('wp_authenticate_user', $user, $password);
+        if (is_wp_error($user)) {
+            return $user;
+        }
+
+        if (! wp_check_password($password, $user->user_pass, $user->ID)) {
+            return new WP_Error(
+                'incorrect_password',
+                sprintf(
+                    /* translators: %s: User name. */
+                    __('<strong>Error:</strong> The password you entered for the username %s is incorrect.'),
+                    '<strong>' . $username . '</strong>'
+                ) .
+                    ' <a href="' . wp_lostpassword_url() . '">' .
+                    __('Lost your password?') .
+                    '</a>'
+            );
+        }
+
+        return $user;
+    }
+endif;
